@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    background-color: #dbdbdb;
+}
+
+h1 {
+    margin: 0;
+    font-size: 48px;
+}
+
+a {
+    text-decoration: none;
+    color: #dbdbdb;
+}
+
+.header {
+    padding: 40px;
+    color: #dbdbdb;
+    background-color: #323232;
+    box-shadow: 0 0 10px black;
+    display: flex;
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+    flex: auto;
+    margin-left: 120px;
+}
+
+.links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.game {
+    margin-top: 50px;
+    display: flex;
+    flex: auto;
+    justify-content: center;
+}
+
+.field {
+    width: 580px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+a img {
+    max-height: 70px;
+    border-radius: 20px;
+
+}
