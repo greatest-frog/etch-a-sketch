@@ -18,8 +18,14 @@
     </div>
     <div class="game">
         <div class="tools">
-            <div class="sizeValue">16 x 16</div>
-            <input type="range" id="pixel_count" min="4" max="50" value="16" step="1">
+            <div id="sizeChooser">
+                <div class="sizeValue">16 x 16</div>
+                <input type="range" id="pixel_count" min="4" max="50" value="16" step="1">
+            </div>
+            <div id="buttons">
+                <button id="brush" class="tool active">Brush</button>
+                <button id="eraser" class="tool">Eraser</button>
+            </div>
         </div>
         <div class="field"></div>
     </div>

@@ -1,21 +1,32 @@
+// Initialize default values
 const DEFAULT_COLOR = '#fff';
 const DEFAULT_PAINT_COLOR = '#000'
 const SIZE = 580;
 const DEFAULT_COUNT = 16;
 
+// Actual values
 let now_count = DEFAULT_COUNT;
 let now_color = DEFAULT_COLOR;
 let now_paint_color = DEFAULT_PAINT_COLOR;
+let now_mode = "brush";
 
+// Html elements
 const field = document.querySelector('.field');
+
+const eraser_bnt = document.getElementById('eraser');
+const brush_btn = document.getElementById('brush');
 
 const scale = document.querySelector('#pixel_count');
 const sizeDiv = document.querySelector('.sizeValue');
 
+// AddEventListener for tools
 scale.addEventListener('input', (e) => {
     changeField(e);
     changeSizeDiv();
 });
+
+eraser.addEventListener('click', (e) => setMode(e));
+brush.addEventListener('click', (e) => setMode(e));
 
 // Creates a field with the actual number of squares
 function makeField() {
@@ -26,7 +37,7 @@ function makeField() {
     }
 }
 
-// create one square
+// Create one square
 function createSquare(id, squareClass){
     const square = document.createElement('div');
     square.classList.add(squareClass);
@@ -37,17 +48,22 @@ function createSquare(id, squareClass){
     return square;
 }
 
-// change the color of paint
 function changeColor(e, color) {
-    e.target.style.backgroundColor = color;
+    switch (now_mode){
+        case 'brush':
+            e.target.style.backgroundColor = color;
+            break;
+        case 'eraser':
+            e.target.style.backgroundColor = '#fff';
+            break;
+    }
 }
 
-// change the number of squares
+// Change the number of squares
 function changeCount(e) {
     now_count = e.target.value;
 }
 
-// change the field
 function changeField(e) {
     changeCount(e);
     makeField();
@@ -55,6 +71,17 @@ function changeField(e) {
 
 function changeSizeDiv() {
     sizeDiv.textContent = `${now_count} x ${now_count}`;
+}
+
+function setActive(e) {
+    const previous_active = document.querySelector('.active');
+    previous_active.classList.remove('active');
+    e.target.classList.add('active');
+}
+
+function setMode(e) {
+    setActive(e);
+    now_mode = e.target.id;
 }
 
 makeField();

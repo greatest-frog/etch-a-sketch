@@ -48,12 +48,21 @@ a {
 .tools {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     flex: 0 1 200px;
 }
 
-.sizeValue {
-    font-size: 20px
+.tool {
+    height: 50px;
+    width: 200px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.active {
+    border: 2px solid #323232;
 }
 
 .field {
@@ -62,9 +71,14 @@ a {
     flex-wrap: wrap;
 }
 
+#sizeChooser {
+    font-size: 20px;
+    text-align: center;
+}
+
 input[type="range"] {
     -webkit-appearance: none;
-    width: 100%;
+    width: 200px;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
@@ -81,10 +95,4 @@ input[type="range"]::-webkit-slider-thumb {
     border: 1px solid #323232;
     border-radius: 10px;
     margin-top: -5px;
-}
-
-a img {
-    max-height: 70px;
-    border-radius: 20px;
-
 }
