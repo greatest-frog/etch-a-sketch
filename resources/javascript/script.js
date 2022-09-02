@@ -11,7 +11,7 @@ let now_paint_color = DEFAULT_PAINT_COLOR;
 let now_mode = "brush";
 
 // Html elements
-const field = document.querySelector('.field');
+const canvas = document.querySelector('.canvas');
 
 const eraser_bnt = document.getElementById('eraser');
 const brush_btn = document.getElementById('brush');
@@ -21,19 +21,19 @@ const sizeDiv = document.querySelector('.sizeValue');
 
 // AddEventListener for tools
 scale.addEventListener('input', (e) => {
-    changeField(e);
+    changeCanvas(e);
     changeSizeDiv();
 });
 
 eraser.addEventListener('click', (e) => setMode(e));
 brush.addEventListener('click', (e) => setMode(e));
 
-// Creates a field with the actual number of squares
-function makeField() {
-    field.textContent = '';
+// Creates a canvas with the actual number of squares
+function setCanvas() {
+    canvas.textContent = '';
     for (let i = 0; i < now_count*now_count; i++) {
         const square = createSquare((i+1).toString(), 'square');
-        field.appendChild(square);
+        canvas.appendChild(square);
     }
 }
 
@@ -42,8 +42,9 @@ function createSquare(id, squareClass){
     const square = document.createElement('div');
     square.classList.add(squareClass);
     square.id = `pixel-${id}`;
-    square.style.cssText =
-        `background-color: ${DEFAULT_COLOR}; height: ${SIZE / now_count}px; width: ${SIZE / now_count}px;`;
+    square.style.cssText = `background-color: ${DEFAULT_COLOR}; 
+                            height: ${SIZE / now_count}px; 
+                            width: ${SIZE / now_count}px;`;
     square.addEventListener('mouseenter', (e) => changeColor(e, now_paint_color));
     return square;
 }
@@ -64,9 +65,9 @@ function changeCount(e) {
     now_count = e.target.value;
 }
 
-function changeField(e) {
+function changeCanvas(e) {
     changeCount(e);
-    makeField();
+    setCanvas();
 }
 
 function changeSizeDiv() {
@@ -84,4 +85,4 @@ function setMode(e) {
     now_mode = e.target.id;
 }
 
-makeField();
+setCanvas();
