@@ -13,11 +13,12 @@ let now_mode = "brush";
 // Html elements
 const canvas = document.querySelector('.canvas');
 
-const eraser_bnt = document.getElementById('eraser');
+const eraser_btn = document.getElementById('eraser');
 const brush_btn = document.getElementById('brush');
+const clear_btn = document.getElementById('clear');
 
-const scale = document.querySelector('#pixel_count');
-const sizeDiv = document.querySelector('.sizeValue');
+const scale = document.getElementById('pixel_count');
+const sizeDiv = document.getElementById('sizeValue');
 
 // AddEventListener for tools
 scale.addEventListener('input', (e) => {
@@ -25,8 +26,9 @@ scale.addEventListener('input', (e) => {
     changeSizeDiv();
 });
 
-eraser.addEventListener('click', (e) => setMode(e));
-brush.addEventListener('click', (e) => setMode(e));
+eraser_btn.addEventListener('click', e => setMode(e));
+brush_btn.addEventListener('click', e => setMode(e));
+clear_btn.addEventListener('click', e => clearCanvas(e))
 
 // Creates a canvas with the actual number of squares
 function setCanvas() {
@@ -83,6 +85,16 @@ function setActive(e) {
 function setMode(e) {
     setActive(e);
     now_mode = e.target.id;
+}
+
+function animateButton(e) {
+    e.target.classList.add('active');
+    setTimeout(() => e.target.classList.remove('active'), 500);
+}
+
+function clearCanvas(e) {
+    setCanvas();
+    animateButton(e);
 }
 
 setCanvas();

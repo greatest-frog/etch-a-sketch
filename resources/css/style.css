@@ -28,6 +28,7 @@ a {
     justify-content: center;
     flex: auto;
     margin-left: 120px;
+    color: #fff;
 }
 
 .links {
@@ -42,7 +43,7 @@ a {
     display: flex;
     flex: auto;
     justify-content: center;
-    gap: 20px;
+    gap: 50px;
 }
 
 .tools {
@@ -56,13 +57,16 @@ a {
 .tool {
     height: 50px;
     width: 200px;
-    border: 2px solid gray;
-    border-radius: 20px;
     margin-top: 20px;
+    border: 2px solid #808080;
+    border-radius: 20px;
+    font-size: 18px;
 }
 
 .active {
-    border: 2px solid #323232;
+    border: 0;
+    background-color: #323232;
+    color: #fff;
 }
 
 .canvas {
