@@ -5,6 +5,14 @@ body {
     background-color: #dbdbdb;
 }
 
+nav {
+    padding: 40px;
+    color: #dbdbdb;
+    background-color: #323232;
+    box-shadow: 0 0 10px black;
+    display: flex;
+}
+
 h1 {
     margin: 0;
     font-size: 48px;
@@ -15,12 +23,10 @@ a {
     color: #dbdbdb;
 }
 
-.header {
-    padding: 40px;
-    color: #dbdbdb;
-    background-color: #323232;
-    box-shadow: 0 0 10px black;
-    display: flex;
+footer {
+    text-align: center;
+    margin: 30px;
+    
 }
 
 .name {
@@ -29,6 +35,10 @@ a {
     flex: auto;
     margin-left: 120px;
     color: #fff;
+}
+
+.text {
+    font-size: 14px;
 }
 
 .links {
@@ -43,7 +53,7 @@ a {
     display: flex;
     flex: auto;
     justify-content: center;
-    gap: 50px;
+    gap: 80px;
 }
 
 .tools {
