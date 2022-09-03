@@ -128,3 +128,21 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 10px;
     margin-top: -5px;
 }
+
+input[type="color"] {
+    -webkit-appearance: none;
+    padding: 0;
+    width: 70px;
+    height: 70px;
+    border: 0;
+    border-radius: 35px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border-radius: 35px;
+    border: none;
+}

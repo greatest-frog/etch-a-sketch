@@ -1,5 +1,5 @@
 // Initialize default values
-const DEFAULT_COLOR = '#fff';
+const DEFAULT_BACKGROUND_COLOR = '#fff';
 const DEFAULT_PAINT_COLOR = '#000'
 const SIZE = 580;
 const DEFAULT_COUNT = 16;
@@ -8,7 +8,6 @@ const DEFAULT_PAINT_TYPE = 'line';
 
 // Actual values
 let now_count = DEFAULT_COUNT;
-let now_color = DEFAULT_COLOR;
 let now_paint_color = DEFAULT_PAINT_COLOR;
 let now_mode = DEFAULT_MODE;
 let now_paint_type = DEFAULT_PAINT_TYPE;
@@ -16,7 +15,10 @@ let now_paint_type = DEFAULT_PAINT_TYPE;
 // Html elements
 const canvas = document.querySelector('.canvas');
 
+const color_picker = document.getElementById('color_picker');
+
 const checkers = document.querySelectorAll('.checker');
+
 const brush_btn = document.getElementById('brush');
 const eraser_btn = document.getElementById('eraser');
 const clear_btn = document.getElementById('clear');
@@ -25,6 +27,8 @@ const scale = document.getElementById('pixel_count');
 const sizeDiv = document.getElementById('sizeValue');
 
 checkers.forEach(checker => checker.addEventListener('click', e => setChosen(e)));
+
+color_picker.addEventListener('input', e => now_paint_color = e.target.value);
 
 brush_btn.addEventListener('click', e => setMode(e));
 eraser_btn.addEventListener('click', e => setMode(e));
@@ -50,19 +54,19 @@ function createSquare(id, squareClass){
     const square = document.createElement('div');
     square.classList.add(squareClass);
     square.id = `pixel-${id}`;
-    square.style.cssText = `background-color: ${DEFAULT_COLOR}; 
+    square.style.cssText = `background-color: ${DEFAULT_BACKGROUND_COLOR}; 
                             height: ${SIZE / now_count}px; 
                             width: ${SIZE / now_count}px;`;
     if (now_paint_type === 'line') {
-        square.addEventListener('mouseenter', (e) => changeColor(e, now_paint_color));
+        square.addEventListener('mouseenter', (e) => changePixelColor(e, now_paint_color));
     }
     else {
-        square.addEventListener('click', (e) => changeColor(e, now_paint_color));
+        square.addEventListener('click', (e) => changePixelColor(e, now_paint_color));
     }
     return square;
 }
 
-function changeColor(e, color) {
+function changePixelColor(e, color) {
     switch (now_mode){
         case 'brush':
             e.target.style.backgroundColor = color;
