@@ -1,6 +1,6 @@
 // Initialize default values
 const DEFAULT_BACKGROUND_COLOR = '#ffffff';
-const DEFAULT_PAINT_COLOR = '#000000'
+const DEFAULT_PAINT_COLOR = '#0a53b1'
 const SIZE = 580;
 const DEFAULT_COUNT = 16;
 const DEFAULT_MODE = 'brush';
