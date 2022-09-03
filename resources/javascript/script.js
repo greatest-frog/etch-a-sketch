@@ -1,6 +1,6 @@
 // Initialize default values
-const DEFAULT_BACKGROUND_COLOR = '#fff';
-const DEFAULT_PAINT_COLOR = '#000'
+const DEFAULT_BACKGROUND_COLOR = '#ffffff';
+const DEFAULT_PAINT_COLOR = '#000000'
 const SIZE = 580;
 const DEFAULT_COUNT = 16;
 const DEFAULT_MODE = 'brush';
@@ -20,6 +20,7 @@ const color_picker = document.getElementById('color_picker');
 const checkers = document.querySelectorAll('.checker');
 
 const brush_btn = document.getElementById('brush');
+const rainbow_btn = document.getElementById('rainbow-brush');
 const eraser_btn = document.getElementById('eraser');
 const clear_btn = document.getElementById('clear');
 
@@ -31,6 +32,7 @@ checkers.forEach(checker => checker.addEventListener('click', e => setChosen(e))
 color_picker.addEventListener('input', e => now_paint_color = e.target.value);
 
 brush_btn.addEventListener('click', e => setMode(e));
+rainbow_btn.addEventListener('click', e => setMode(e));
 eraser_btn.addEventListener('click', e => setMode(e));
 clear_btn.addEventListener('click', e => clearCanvas(e))
 
@@ -66,6 +68,46 @@ function createSquare(id, squareClass){
     return square;
 }
 
+// Return string hex
+function toNorm(string) {
+    const array = string.replace(/[^\d,]/g, '').split(',');
+    const hex_array = array.map(el => {
+        let hex = Number(el).toString(16);
+        if (hex.length != 2) return `0${hex}`
+        else return hex
+    });
+    return `#${hex_array[0]}${hex_array[1]}${hex_array[2]}`;
+}
+
+// Return the darker hex value
+function getNewHex(number) {
+    let hex = Math.floor(number * 7.5 / 10);
+    if (hex < 16) return '00';
+    else return hex.toString(16);
+}
+
+function getRandomHex(number) {
+    return Math.floor(Math.random()*number).toString(16);
+}
+
+// Return actual color for rainbow brush
+function getColor(e) {
+    if (e.target.style.backgroundColor && toNorm(e.target.style.backgroundColor) !== DEFAULT_BACKGROUND_COLOR) {
+        console.log(toNorm(e.target.style.backgroundColor), ' 1')
+        const backgroundColor = toNorm(e.target.style.backgroundColor);
+        const red = parseInt(backgroundColor.slice(1, 3), 16);
+        const green = parseInt(backgroundColor.slice(3, 5), 16);
+        const blue = parseInt(backgroundColor.slice(5), 16);
+        let new_backgroundColor = 
+            `#${getNewHex(red)}${getNewHex(green)}${getNewHex(blue)}`;
+        console.log(new_backgroundColor, ' 2');
+        return new_backgroundColor;
+    }
+    else {
+        return `#${getRandomHex(255)}${getRandomHex(255)}${getRandomHex(255)}`
+    }
+}
+
 function changePixelColor(e, color) {
     switch (now_mode){
         case 'brush':
@@ -73,6 +115,9 @@ function changePixelColor(e, color) {
             break;
         case 'eraser':
             e.target.style.backgroundColor = '#fff';
+            break;
+        case 'rainbow-brush':
+            e.target.style.backgroundColor = getColor(e);
             break;
     }
 }
