@@ -54,6 +54,24 @@ a {
     flex: 0 1 200px;
 }
 
+.box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.checker {
+    width: 14px;
+    height: 14px;
+    background-color: #fff;
+    border: 1px solid #323232;
+    border-radius: 7px;
+}
+
+.chosen {
+    background-color: #808080;
+}
+
 .tool {
     height: 50px;
     width: 200px;
@@ -73,6 +91,16 @@ a {
     width: 580px;
     display: flex;
     flex-wrap: wrap;
+}
+
+#checkbox {
+    text-align: center;
+    font-size: 14px;
+}
+
+#boxes {
+    display: flex;
+    gap: 15px;
 }
 
 #sizeChooser {

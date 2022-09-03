@@ -3,32 +3,38 @@ const DEFAULT_COLOR = '#fff';
 const DEFAULT_PAINT_COLOR = '#000'
 const SIZE = 580;
 const DEFAULT_COUNT = 16;
+const DEFAULT_MODE = 'brush';
+const DEFAULT_PAINT_TYPE = 'line';
 
 // Actual values
 let now_count = DEFAULT_COUNT;
 let now_color = DEFAULT_COLOR;
 let now_paint_color = DEFAULT_PAINT_COLOR;
-let now_mode = "brush";
+let now_mode = DEFAULT_MODE;
+let now_paint_type = DEFAULT_PAINT_TYPE;
 
 // Html elements
 const canvas = document.querySelector('.canvas');
 
-const eraser_btn = document.getElementById('eraser');
+const checkers = document.querySelectorAll('.checker');
 const brush_btn = document.getElementById('brush');
+const eraser_btn = document.getElementById('eraser');
 const clear_btn = document.getElementById('clear');
 
 const scale = document.getElementById('pixel_count');
 const sizeDiv = document.getElementById('sizeValue');
+
+checkers.forEach(checker => checker.addEventListener('click', e => setChosen(e)));
+
+brush_btn.addEventListener('click', e => setMode(e));
+eraser_btn.addEventListener('click', e => setMode(e));
+clear_btn.addEventListener('click', e => clearCanvas(e))
 
 // AddEventListener for tools
 scale.addEventListener('input', (e) => {
     changeCanvas(e);
     changeSizeDiv();
 });
-
-eraser_btn.addEventListener('click', e => setMode(e));
-brush_btn.addEventListener('click', e => setMode(e));
-clear_btn.addEventListener('click', e => clearCanvas(e))
 
 // Creates a canvas with the actual number of squares
 function setCanvas() {
@@ -47,7 +53,12 @@ function createSquare(id, squareClass){
     square.style.cssText = `background-color: ${DEFAULT_COLOR}; 
                             height: ${SIZE / now_count}px; 
                             width: ${SIZE / now_count}px;`;
-    square.addEventListener('mouseenter', (e) => changeColor(e, now_paint_color));
+    if (now_paint_type === 'line') {
+        square.addEventListener('mouseenter', (e) => changeColor(e, now_paint_color));
+    }
+    else {
+        square.addEventListener('click', (e) => changeColor(e, now_paint_color));
+    }
     return square;
 }
 
@@ -80,6 +91,18 @@ function setActive(e) {
     const previous_active = document.querySelector('.active');
     previous_active.classList.remove('active');
     e.target.classList.add('active');
+}
+
+function setPaintType(e) {
+    now_paint_type = e.target.id;
+    setCanvas();
+}
+
+function setChosen(e) {
+    const previous_chosen = document.querySelector('.chosen');
+    previous_chosen.classList.remove('chosen');
+    e.target.classList.add('chosen');
+    setPaintType(e);
 }
 
 function setMode(e) {
